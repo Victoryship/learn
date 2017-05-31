@@ -3,22 +3,22 @@ laern laravel
 
 
 网页报错404配置在NGINX 上加配置
-location ~ \.php($|/){
-        fastcgi_index   index.php;
-        fastcgi_pass    127.0.0.1:9000;
-        include         fastcgi_params;
-        set $real_script_name $fastcgi_script_name;
-        if ($real_script_name ~ "^(.+?\.php)(/.+)$") {
-            set $real_script_name $1;
-        }
-        fastcgi_split_path_info ^(.+?\.php)(/.*)$;
-        fastcgi_param   PATH_INFO               $fastcgi_path_info;
-        fastcgi_param   SCRIPT_NAME             $real_script_name;
-        fastcgi_param   SCRIPT_FILENAME         $document_root$real_script_name;
-        fastcgi_param   PHP_VALUE               open_basedir=$document_root:/tmp/:/proc/;
-        access_log  /home/wwwlogs/access.log;
-        error_log  /home/wwwlogs/nginx_error.log;
-        }
+        location ~ \.php($|/){
+                fastcgi_index   index.php;
+                fastcgi_pass    127.0.0.1:9000;
+                include         fastcgi_params;
+                set $real_script_name $fastcgi_script_name;
+                if ($real_script_name ~ "^(.+?\.php)(/.+)$") {
+                    set $real_script_name $1;
+                }
+                fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+                fastcgi_param   PATH_INFO               $fastcgi_path_info;
+                fastcgi_param   SCRIPT_NAME             $real_script_name;
+                fastcgi_param   SCRIPT_FILENAME         $document_root$real_script_name;
+                fastcgi_param   PHP_VALUE               open_basedir=$document_root:/tmp/:/proc/;
+                access_log  /home/wwwlogs/access.log;
+                error_log  /home/wwwlogs/nginx_error.log;
+                }
         
         
         fastcgi_pass    127.0.0.1:9000; 加上这段配置后出现502错误,需要修该php-fpm
