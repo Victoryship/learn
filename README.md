@@ -40,3 +40,25 @@ laern laravel
       request_slowlog_timeout = 0
       slowlog = var/log/slow.log
       在listen上要加上监听的9000端口号;
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      Thinkphp 3.2 nginx路由去掉index.php ：
+      location / {
+            index  index.html index.htm index.php;
+            #autoindex  on;
+            #转发规则,支持url重写
+            if (!-e $request_filename) {
+                rewrite  ^(.*)$  /index.php?s=$1  last;
+                break;
+            }
+        }
